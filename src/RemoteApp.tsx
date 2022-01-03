@@ -5,18 +5,21 @@ import counterReducer from './redux/counter/counter.slice';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { increment } from './redux/counter/counter.slice';
 
-const remoteAppScope = 'remoteApp';
+const remoteAppScope = 'counter';
 
 const RemoteApp = () => {
   const dispatch = useAppDispatch();
-  const counter = useAppSelector(state => state.counter.value);
+  const counter = useAppSelector(state => state[remoteAppScope]);
   // const state = useSelector((state) => state[remoteAppScope]);
 
+  if (counter) {
+    console.log(counter.value)
+  }
   return (
     <div style={{ marginTop: '10px' }}>
       <div>RemoteApp</div>
       <div>
-        RemoteApp's name from the redux store : {counter}
+        RemoteApp's name from the redux store : {counter && JSON.stringify(counter.value)}
       </div>
 
       <div>
