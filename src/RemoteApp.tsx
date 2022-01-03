@@ -1,31 +1,26 @@
-import React, { useState } from 'react';
-import { Provider, useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { store as appStore, changeAppNameAction, reducer } from './store'
+import React, { useEffect } from 'react';
+import { Provider } from 'react-redux';
+import { store as appStore } from './redux/store';
+import counterReducer from './redux/counter/counter.slice';
+import { useAppDispatch, useAppSelector } from './redux/hooks';
+import { increment } from './redux/counter/counter.slice';
 
 const remoteAppScope = 'remoteApp';
 
 const RemoteApp = () => {
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state[remoteAppScope]);
-  const [remoteAppInput, setRemoteAppInput] = useState('');
+  const dispatch = useAppDispatch();
+  const counter = useAppSelector(state => state.counter.value);
+  // const state = useSelector((state) => state[remoteAppScope]);
 
   return (
     <div style={{ marginTop: '10px' }}>
       <div>RemoteApp</div>
       <div>
-        RemoteApp's name from the redux store : {state && state.appName}
+        RemoteApp's name from the redux store : {counter}
       </div>
 
       <div>
-        <input
-          style={{ marginRight: '10px' }}
-          type="text"
-          onChange={(e) => {
-            setRemoteAppInput(e.target.value);
-          }}
-        />
-        <button onClick={() => dispatch(changeAppNameAction(remoteAppInput))}>
+        <button onClick={() => dispatch(increment())}>
           Dispatch RemoteApp new name
         </button>
       </div>
@@ -33,10 +28,10 @@ const RemoteApp = () => {
   );
 };
 
-const RemoteAppWrapper = (props) => {
+const RemoteAppWrapper = (props: any) => {
   const { store } = props;
   useEffect(() => {
-    if (store) store.injectReducer(remoteAppScope, reducer);
+    if (store) store.injectReducer(remoteAppScope, counterReducer);
   }, []);
 
   return (
