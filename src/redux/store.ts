@@ -1,8 +1,8 @@
 import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit';
-import counterReducer from '../redux/counter/counter.slice';
+import usersReducer from './users/users.slice';
 
 const staticReducers = {
-  counter: counterReducer,
+  users: usersReducer,
 };
 
 const createReducer = (asyncReducers: any) => {
