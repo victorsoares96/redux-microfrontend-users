@@ -13,7 +13,7 @@ module.exports = {
   },
 
   output: {
-    publicPath: process.env.MODE === 'production' ? 'https://victorsoares-app2.netlify.app/' : 'http://localhost:3002/',
+    publicPath: process.env.NODE_ENV === 'production' ? 'https://victorsoares-app2.netlify.app/' : 'http://localhost:3002/',
   },
 
   module: {
