@@ -9,6 +9,7 @@ module.exports = merge(common, {
   },
   devServer: {
     static: "./dist",
+    port: 3002
   },
   output: {
     publicPath: "http://localhost:3002/",
