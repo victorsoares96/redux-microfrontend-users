@@ -1,20 +1,10 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const deps = require('./package.json').dependencies;
+
 module.exports = {
   entry: './src/index',
   cache: false,
-
-  mode: 'development',
-  devtool: 'source-map',
-
-  optimization: {
-    minimize: false,
-  },
-
-  output: {
-    publicPath: process.env.NODE_ENV === 'production' ? 'https://victorsoares-app2.netlify.app/' : 'http://localhost:3002/',
-  },
 
   module: {
     rules: [
