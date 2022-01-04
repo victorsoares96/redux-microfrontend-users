@@ -1,6 +1,17 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
+const { TuneDtsPlugin } = require('@efox/emp-tune-dts-plugin');
+const path = require('path');
+
 const deps = require('./package.json').dependencies;
+
+const createName = 'index.d.ts'
+const createPath = './dist'
+
+function operationDemo(fileData) {
+  console.log(fileData)
+  return fileData;
+}
 
 module.exports = {
   entry: './src/index',
@@ -49,5 +60,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
+    new TuneDtsPlugin({
+      output: path.join(createPath, createName),
+      path: createPath,
+      name: createName,
+      isDefault:true,
+      // Incoming function custom operation
+      operation: operationDemo
+    })
   ],
 };
