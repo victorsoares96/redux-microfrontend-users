@@ -11,12 +11,14 @@ const RemoteApp = () => {
   const dispatch = useAppDispatch();
   // const tickets = useAppSelector((state) => state["tickets"]);
   const users = useAppSelector((state) => state["users"]);
+  const hostName = useAppSelector((state) => state);
   // const state = useSelector((state) => state[remoteAppScope]);
 
   return (
     <div style={{ border: "1.5px solid blue", marginTop: "10px" }}>
       <h3>Welcome to Remote App</h3>
 
+      <span>{JSON.stringify(hostName)}</span>
       <div>
         <button
           onClick={() =>
