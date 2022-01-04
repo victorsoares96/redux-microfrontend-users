@@ -35,10 +35,10 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'redux-microfrontend-users',
+      name: 'users',
       filename: 'remoteEntry.js',
       exposes: {
-        './redux-microfrontend-users': './src/App',
+        './users': './src/App',
       },
       shared: {
         ...deps,
