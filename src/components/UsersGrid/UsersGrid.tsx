@@ -1,22 +1,16 @@
 import React, { useEffect } from "react";
-import { Provider } from "react-redux";
-import { store as appStore } from "./redux/store";
-import counterReducer from "./redux/users/users.slice";
-import { useAppDispatch, useAppSelector } from "./redux/hooks";
-import { createUser } from "./redux/users/users.slice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { createUser } from "../../redux/users/users.slice";
 
-const remoteAppScope = "users";
 
-const RemoteApp = () => {
+const UsersGrid = () => {
   const dispatch = useAppDispatch();
-  // const tickets = useAppSelector((state) => state["tickets"]);
   const users = useAppSelector((state) => state["users"]);
   const hostName = useAppSelector((state) => state);
-  // const state = useSelector((state) => state[remoteAppScope]);
 
   return (
     <div style={{ border: "1.5px solid blue", marginTop: "10px" }}>
-      <h3>Welcome to Remote App</h3>
+      <h3>Welcome to Users Grid</h3>
 
       <span>{JSON.stringify(hostName)}</span>
       <div>
@@ -61,17 +55,4 @@ const RemoteApp = () => {
   );
 };
 
-const RemoteAppWrapper = (props: any) => {
-  const { store } = props;
-  useEffect(() => {
-    if (store) store.injectReducer(remoteAppScope, counterReducer);
-  }, []);
-
-  return (
-    <Provider store={store || appStore}>
-      <RemoteApp />
-    </Provider>
-  );
-};
-
-export default RemoteAppWrapper;
+export default UsersGrid;

@@ -6,17 +6,11 @@ const path = require('path');
 const deps = require('./package.json').dependencies;
 
 const createName = 'index.d.ts'
-const createPath = './dist'
-
-function operationDemo(fileData) {
-  console.log(fileData)
-  return fileData;
-}
+const createPath = './src'
 
 module.exports = {
   entry: './src/index',
   cache: false,
-
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
   },
@@ -39,13 +33,12 @@ module.exports = {
       },
     ],
   },
-
   plugins: [
     new ModuleFederationPlugin({
-      name: 'app2',
+      name: 'redux-microfrontend-users',
       filename: 'remoteEntry.js',
       exposes: {
-        './RemoteApp': './src/RemoteApp',
+        './redux-microfrontend-users': './src/App',
       },
       shared: {
         ...deps,
@@ -64,9 +57,7 @@ module.exports = {
       output: path.join(createPath, createName),
       path: createPath,
       name: createName,
-      isDefault:true,
-      // Incoming function custom operation
-      operation: operationDemo
+      isDefault:true
     })
   ],
 };
